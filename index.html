@@ -811,6 +811,10 @@
                             </svg>
                             <span class="h-px w-12 bg-champagne/70"></span>
                         </div>
+
+                        <!-- Short Greeting (name filled in by JS) -->
+                        <p id="rsvp-greeting" class="font-serif italic text-xl sm:text-2xl text-midnight mt-5 break-words"></p>
+                        <p class="text-sm text-midnight/75 mt-1 leading-relaxed">We would be honored to have you celebrate with us.</p>
                     </div>
 
                     <!-- Guest Name (from link, read-only) -->
@@ -1169,6 +1173,7 @@
             const guestName = (new URLSearchParams(window.location.search).get('name') || '')
                 .replace(/\s+/g, ' ').trim().slice(0, 80);
             document.getElementById('rsvp-guest-name').value = guestName || 'Honored Guest';
+            document.getElementById('rsvp-greeting').textContent = `Dear ${guestName || 'Honored Guest'},`;
 
             function showRsvpStep(step) {
                 [stepRespond, stepThanks].forEach(s => s.classList.add('hidden'));
