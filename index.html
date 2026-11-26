@@ -1147,8 +1147,11 @@
 
             /* ---------------------------------------------------------------
                7. RSVP MODAL: NAME FROM ?name=, ACCEPT / DECLINE, GIFT QR
-               Responses are not saved anywhere yet.
+               Each response is sent to a Google Sheet (Apps Script web app).
                --------------------------------------------------------------- */
+            // Paste your Apps Script web app URL (ends in /exec). Leave empty to save nothing.
+            const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwRD6bkZXgbrxGnTAkk5DJi5TfU-iFMwBYCPJzLVAhURJtWGTxCMAXrPB7q-RDqc-La/exec';
+
             const rsvpModal = document.getElementById('rsvp-modal');
             const rsvpPanel = document.getElementById('rsvp-modal-panel');
             const rsvpScroll = document.getElementById('rsvp-modal-scroll');
@@ -1251,8 +1254,24 @@
                 rsvpPanel.focus({ preventScroll: true });
             });
 
-            // The optional message / reason is collected here but not saved yet
-            document.getElementById('rsvp-note-confirm-btn').addEventListener('click', () => showRsvpThanks(rsvpAccepted));
+            // Send name, answer and message to the sheet; the sheet adds the time
+            function saveRsvp(accepted) {
+                if (!RSVP_ENDPOINT) return;
+                fetch(RSVP_ENDPOINT, {
+                    method: 'POST',
+                    mode: 'no-cors', // Apps Script can't answer cross-site, so this is fire-and-forget
+                    body: new URLSearchParams({
+                        name: guestName || 'Honored Guest',
+                        answer: accepted ? 'Yes' : 'No',
+                        message: noteInput.value.trim()
+                    })
+                }).catch(() => {});
+            }
+
+            document.getElementById('rsvp-note-confirm-btn').addEventListener('click', () => {
+                saveRsvp(rsvpAccepted);
+                showRsvpThanks(rsvpAccepted);
+            });
 
             document.getElementById('rsvp-close-btn').addEventListener('click', closeRsvpModal);
             document.getElementById('rsvp-ok-btn').addEventListener('click', closeRsvpModal);
