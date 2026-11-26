@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeremiah &amp; Regine Bernadette | Wedding Invitation</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond, Pinyon Script, Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#101E36',
+                        midnightDeep: '#0A1324',
+                        dusty: '#6E8CA8',
+                        mist: '#A8BDD0',
+                        steel: '#4A6583',
+                        oldRose: '#C08081',
+                        beigeTone: '#D8C8B8',
+                        ivory: '#F7F8FA',
+                        champagne: '#C8B282',
+                        champagneLight: '#DFD0AC'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        script: ['"Pinyon Script"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Luxury Aesthetics & Paper Grain */
+        body {
+            background-color: #F7F8FA;
+            color: #101E36;
+            overflow-x: hidden;
+        }
+
+        .paper-texture {
+            background-image: radial-gradient(rgba(110, 140, 168, 0.08) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .midnight-texture {
+            background: radial-gradient(circle at 50% 20%, #192E52 0%, #101E36 60%, #0A1324 100%);
+        }
+
+        /* Envelope Opening Animation */
+        #envelope-overlay {
+            transition: opacity 1.15s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.15s ease;
+        }
+        #envelope-overlay.opened {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .envelope-top-flap {
+            transform-origin: top center;
+            transition: transform 0.95s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .envelope-bottom-flap {
+            transform-origin: bottom center;
+            transition: transform 0.95s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #envelope-overlay.opened .envelope-top-flap {
+            transform: rotateX(180deg);
+        }
+        #envelope-overlay.opened .envelope-bottom-flap {
+            transform: translateY(100%);
+        }
+
+        /* Embossed Metallic Champagne Gold Wax Seal */
+        .wax-seal {
+            background: radial-gradient(circle at 30% 30%, #DFD0AC 0%, #C8B282 48%, #9C8454 85%, #7A653C 100%);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6), inset 0 2px 6px rgba(255, 255, 255, 0.65), inset 0 -4px 10px rgba(55, 40, 12, 0.65);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .wax-seal:hover {
+            transform: scale(1.06);
+            box-shadow: 0 18px 38px rgba(200, 178, 130, 0.4), inset 0 2px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Arched Frame */
+        .arch-frame {
+            border-radius: 9999px 9999px 1.25rem 1.25rem;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.85s ease-out, transform 0.85s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gentle Sway Animation */
+        @keyframes gentleSway {
+            0%, 100% { transform: rotate(0deg) translateY(0px); }
+            50% { transform: rotate(1.5deg) translateY(-4px); }
+        }
+        .animate-sway {
+            animation: gentleSway 7s ease-in-out infinite;
+        }
+
+        /* RSVP Modal */
+        #rsvp-modal {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+        }
+        #rsvp-modal.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.5s ease, visibility 0s;
+        }
+        #rsvp-modal .rsvp-modal-panel {
+            transform: translateY(24px) scale(0.97);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #rsvp-modal.open .rsvp-modal-panel {
+            transform: translateY(0) scale(1);
+        }
+        @keyframes rsvpStepIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .rsvp-step-in {
+            animation: rsvpStepIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-dusty selection:text-white">
+
+    <!-- =====================================================================
+         1. INTERACTIVE WAX-SEAL ENVELOPE COVER
+         ===================================================================== -->
+    <div id="envelope-overlay" class="fixed inset-0 z-50 flex items-center justify-center midnight-texture px-4 overflow-hidden">
+        <!-- Double Gold & Dusty Blue Frame -->
+        <div class="absolute inset-3 sm:inset-6 border border-champagne/35 rounded-2xl pointer-events-none"></div>
+        <div class="absolute inset-5 sm:inset-8 border border-dusty/25 rounded-xl pointer-events-none"></div>
+
+        <!-- Animated Top & Bottom Envelope Flaps -->
+        <div class="envelope-top-flap absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-midnightDeep/95 to-midnight/40 border-b border-champagne/25 pointer-events-none"
+             style="clip-path: polygon(0 0, 100% 0, 50% 90%);"></div>
+        <div class="envelope-bottom-flap absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-midnightDeep/95 to-transparent pointer-events-none"
+             style="clip-path: polygon(0 100%, 100% 100%, 50% 12%);"></div>
+
+        <!-- Celestial & Botanical Corner Flourish Top-Left -->
+        <svg class="absolute top-6 left-6 w-28 h-28 sm:w-40 sm:h-40 text-dusty/40 pointer-events-none animate-sway" viewBox="0 0 200 200" fill="none">
+            <path d="M15 180 C 30 110, 80 50, 180 20" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M45 125 C 25 105, 25 85, 50 78 C 62 95, 58 115, 45 125 Z" fill="currentColor" fill-opacity="0.45"/>
+            <path d="M85 85 C 65 65, 70 42, 95 40 C 102 58, 98 75, 85 85 Z" fill="currentColor" fill-opacity="0.5"/>
+            <path d="M128 52 C 115 32, 125 14, 145 16 C 148 34, 140 46, 128 52 Z" fill="currentColor" fill-opacity="0.4"/>
+            <path d="M65 112 C 90 118, 112 108, 118 90 C 98 86, 78 96, 65 112 Z" fill="#A8BDD0" fill-opacity="0.35"/>
+            <circle cx="155" cy="30" r="3" fill="#C8B282" fill-opacity="0.7"/>
+        </svg>
+
+        <!-- Celestial & Botanical Corner Flourish Bottom-Right -->
+        <svg class="absolute bottom-6 right-6 w-28 h-28 sm:w-40 sm:h-40 text-dusty/40 pointer-events-none rotate-180 animate-sway" viewBox="0 0 200 200" fill="none">
+            <path d="M15 180 C 30 110, 80 50, 180 20" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M45 125 C 25 105, 25 85, 50 78 C 62 95, 58 115, 45 125 Z" fill="currentColor" fill-opacity="0.45"/>
+            <path d="M85 85 C 65 65, 70 42, 95 40 C 102 58, 98 75, 85 85 Z" fill="currentColor" fill-opacity="0.5"/>
+            <path d="M65 112 C 90 118, 112 108, 118 90 C 98 86, 78 96, 65 112 Z" fill="#A8BDD0" fill-opacity="0.35"/>
+            <circle cx="155" cy="30" r="3" fill="#C8B282" fill-opacity="0.7"/>
+        </svg>
+
+        <!-- Center Envelope Content -->
+        <div class="relative z-10 max-w-lg w-full text-center px-6 py-10">
+            <p class="text-xs sm:text-sm tracking-[0.32em] uppercase text-mist mb-3">You Are Cordially Invited</p>
+            <h1 class="font-serif text-3xl sm:text-4xl text-ivory tracking-wide font-medium mb-1">
+                Jeremiah Corpuz
+            </h1>
+            <p class="font-script text-4xl sm:text-5xl text-champagne my-1">&amp;</p>
+            <h1 class="font-serif text-3xl sm:text-4xl text-ivory tracking-wide font-medium mb-8">
+                Regine Bernadette Alibuyog
+            </h1>
+
+            <!-- Embossed Monogram Wax Seal ("J&R") -->
+            <div class="flex flex-col items-center justify-center my-6">
+                <button id="open-invitation-btn" aria-label="Tap the Seal to Open Invitation"
+                        class="wax-seal w-28 h-28 sm:w-32 sm:h-32 rounded-full flex items-center justify-center border-2 border-champagneLight/80 cursor-pointer group focus:outline-none focus:ring-4 focus:ring-champagne/40">
+                    <div class="w-22 h-22 sm:w-24 sm:h-24 rounded-full border border-midnight/40 flex flex-col items-center justify-center px-2 shadow-inner">
+                        <span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-midnight drop-shadow-sm">J&amp;R</span>
+                        <span class="text-[9px] uppercase tracking-[0.22em] text-midnight/85 font-semibold mt-0.5">02.12.27</span>
+                    </div>
+                </button>
+                <button id="open-text-btn" class="mt-6 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-dusty/25 hover:bg-dusty/40 border border-mist/45 text-ivory text-xs uppercase tracking-[0.25em] transition-all cursor-pointer">
+                    <span>Tap the Seal to Open Invitation</span>
+                </button>
+            </div>
+
+            <p class="text-[11px] text-mist/75 tracking-wider mt-4">
+                Tap to reveal invitation &amp; start soft wedding melody
+            </p>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         FLOATING MUTE/UNMUTE MUSIC TOGGLE BUTTON (BOTTOM-RIGHT)
+         ===================================================================== -->
+    <button id="music-toggle-btn" title="Toggle Background Music" aria-label="Toggle Background Music"
+            class="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-midnight/90 backdrop-blur-md border border-champagne/60 text-champagne shadow-2xl flex items-center justify-center hover:scale-105 transition-all cursor-pointer">
+        <!-- Sound On Icon -->
+        <svg id="icon-sound-on" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"/>
+        </svg>
+        <!-- Sound Muted Icon -->
+        <svg id="icon-sound-off" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+        </svg>
+    </button>
+
+    <!-- =====================================================================
+         NAVIGATION HEADER
+         ===================================================================== -->
+    <header class="sticky top-0 z-30 bg-midnight/90 backdrop-blur-md border-b border-dusty/25">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="#home" class="font-serif text-xl sm:text-2xl tracking-widest text-ivory flex items-center gap-1">
+                <span>J</span><span class="font-script text-champagne text-3xl sm:text-4xl">&amp;</span><span>R</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex items-center gap-7 text-xs uppercase tracking-[0.2em] text-mist font-medium">
+                <li><a href="#home" class="hover:text-champagne transition-colors py-2">Home</a></li>
+                <li><a href="#story" class="hover:text-champagne transition-colors py-2">Our Story</a></li>
+                <li><a href="#details" class="hover:text-champagne transition-colors py-2">Details</a></li>
+                <li><a href="#entourage" class="hover:text-champagne transition-colors py-2">Entourage</a></li>
+                <li><a href="#attire" class="hover:text-champagne transition-colors py-2">Attire &amp; Gifts</a></li>
+                <li>
+                    <a href="#rsvp" data-open-rsvp class="px-4 py-2 rounded-full bg-dusty hover:bg-champagne hover:text-midnight text-ivory transition-all font-semibold">
+                        RSVP
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" aria-label="Open Navigation Menu" class="md:hidden p-2.5 rounded-lg text-ivory hover:bg-dusty/20 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-midnightDeep/95 backdrop-blur-lg border-b border-dusty/30 px-6 py-5">
+            <ul class="flex flex-col space-y-3 text-center text-xs uppercase tracking-[0.22em] text-ivory">
+                <li><a href="#home" class="mobile-nav-link block py-2.5 hover:text-champagne">Home</a></li>
+                <li><a href="#story" class="mobile-nav-link block py-2.5 hover:text-champagne">Our Story</a></li>
+                <li><a href="#details" class="mobile-nav-link block py-2.5 hover:text-champagne">Ceremony &amp; Reception</a></li>
+                <li><a href="#entourage" class="mobile-nav-link block py-2.5 hover:text-champagne">The Entourage</a></li>
+                <li><a href="#attire" class="mobile-nav-link block py-2.5 hover:text-champagne">Attire &amp; Gift Guide</a></li>
+                <li class="pt-2">
+                    <a href="#rsvp" data-open-rsvp class="mobile-nav-link inline-block w-full py-3 rounded-full bg-dusty text-ivory font-semibold">
+                        Confirm Attendance (RSVP)
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- =====================================================================
+         2. HERO SECTION & LIVE COUNTDOWN TIMER
+         ===================================================================== -->
+    <section id="home" class="relative min-h-[92vh] flex items-center justify-center midnight-texture text-ivory px-4 py-20 overflow-hidden">
+        <!-- Radial Glow -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(110,140,168,0.2)_0%,transparent_70%)] pointer-events-none"></div>
+
+        <!-- Botanical & Celestial Corner Ornaments -->
+        <svg class="absolute top-0 left-0 w-44 h-44 sm:w-72 sm:h-72 text-dusty/35 pointer-events-none animate-sway" viewBox="0 0 260 260" fill="none">
+            <path d="M10 240 C 35 140, 110 60, 245 15" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M40 185 C 15 160, 20 130, 52 122 C 66 144, 60 172, 40 185 Z" fill="#6E8CA8" fill-opacity="0.45"/>
+            <path d="M90 132 C 65 105, 72 72, 106 68 C 118 92, 112 118, 90 132 Z" fill="#A8BDD0" fill-opacity="0.4"/>
+            <path d="M148 82 C 128 56, 138 28, 170 28 C 176 52, 168 72, 148 82 Z" fill="#6E8CA8" fill-opacity="0.45"/>
+            <path d="M72 162 C 106 170, 136 156, 145 130 C 118 124, 90 140, 72 162 Z" fill="#A8BDD0" fill-opacity="0.35"/>
+            <circle cx="195" cy="42" r="4" fill="#C8B282" fill-opacity="0.65"/>
+            <circle cx="115" cy="145" r="3" fill="#C8B282" fill-opacity="0.55"/>
+        </svg>
+
+        <svg class="absolute bottom-0 right-0 w-44 h-44 sm:w-72 sm:h-72 text-dusty/35 pointer-events-none rotate-180 animate-sway" viewBox="0 0 260 260" fill="none">
+            <path d="M10 240 C 35 140, 110 60, 245 15" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M40 185 C 15 160, 20 130, 52 122 C 66 144, 60 172, 40 185 Z" fill="#6E8CA8" fill-opacity="0.45"/>
+            <path d="M90 132 C 65 105, 72 72, 106 68 C 118 92, 112 118, 90 132 Z" fill="#A8BDD0" fill-opacity="0.4"/>
+            <path d="M148 82 C 128 56, 138 28, 170 28 C 176 52, 168 72, 148 82 Z" fill="#6E8CA8" fill-opacity="0.45"/>
+            <path d="M72 162 C 106 170, 136 156, 145 130 C 118 124, 90 140, 72 162 Z" fill="#A8BDD0" fill-opacity="0.35"/>
+            <circle cx="195" cy="42" r="4" fill="#C8B282" fill-opacity="0.65"/>
+        </svg>
+
+        <!-- Hero Main Framed Card -->
+        <div class="relative z-10 max-w-3xl w-full text-center px-5 sm:px-12 py-12 sm:py-16 rounded-3xl border border-dusty/40 bg-midnightDeep/45 backdrop-blur-sm shadow-2xl">
+            <p class="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-mist mb-4">
+                TOGETHER WITH THEIR FAMILIES
+            </p>
+
+            <!-- Couple Names -->
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-wide text-ivory leading-tight">
+                Jeremiah
+            </h1>
+            <div class="my-1 sm:my-2 flex items-center justify-center gap-4">
+                <span class="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-champagne/75"></span>
+                <span class="font-script text-4xl sm:text-6xl text-champagne">&amp;</span>
+                <span class="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-champagne/75"></span>
+            </div>
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-wide text-ivory leading-tight">
+                Regine Bernadette
+            </h1>
+
+            <p class="mt-4 font-serif italic text-base sm:text-lg text-mist/90 tracking-wider">
+                Jeremiah Corpuz &amp; Regine Bernadette Alibuyog
+            </p>
+
+            <p class="mt-4 text-xs sm:text-sm uppercase tracking-[0.28em] text-mist font-light">
+                Request the honor of your presence at their marriage
+            </p>
+
+            <!-- Date & Location Divider -->
+            <div class="mt-7 pt-5 border-t border-b border-dusty/35 py-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 text-ivory">
+                <span class="font-serif text-xl sm:text-2xl tracking-wider">February 12, 2027</span>
+                <span class="hidden sm:inline text-champagne">•</span>
+                <span class="font-serif text-xl sm:text-2xl tracking-wider text-mist">City of Batac, Ilocos Norte</span>
+            </div>
+
+            <!-- Live Real-Time Countdown Timer -->
+            <div class="mt-8">
+                <p class="text-[10px] uppercase tracking-[0.3em] text-champagne mb-4">Counting Down To Forever</p>
+                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
+                    <div class="rounded-2xl bg-midnight/85 border border-dusty/45 py-3 px-2 shadow-inner">
+                        <span id="cd-days" class="block font-serif text-2xl sm:text-4xl font-semibold text-ivory">00</span>
+                        <span class="text-[10px] uppercase tracking-widest text-mist">Days</span>
+                    </div>
+                    <div class="rounded-2xl bg-midnight/85 border border-dusty/45 py-3 px-2 shadow-inner">
+                        <span id="cd-hours" class="block font-serif text-2xl sm:text-4xl font-semibold text-ivory">00</span>
+                        <span class="text-[10px] uppercase tracking-widest text-mist">Hours</span>
+                    </div>
+                    <div class="rounded-2xl bg-midnight/85 border border-dusty/45 py-3 px-2 shadow-inner">
+                        <span id="cd-minutes" class="block font-serif text-2xl sm:text-4xl font-semibold text-ivory">00</span>
+                        <span class="text-[10px] uppercase tracking-widest text-mist">Minutes</span>
+                    </div>
+                    <div class="rounded-2xl bg-midnight/85 border border-dusty/45 py-3 px-2 shadow-inner">
+                        <span id="cd-seconds" class="block font-serif text-2xl sm:text-4xl font-semibold text-champagne">00</span>
+                        <span class="text-[10px] uppercase tracking-widest text-mist">Seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primary Action Buttons -->
+            <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#rsvp" data-open-rsvp class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-dusty hover:bg-champagne hover:text-midnight text-ivory text-xs uppercase tracking-[0.25em] font-semibold shadow-lg transition-all">
+                    Confirm Attendance
+                </a>
+                <button id="download-ics-btn" type="button"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-champagne/65 bg-midnightDeep/70 hover:bg-champagne hover:text-midnight text-champagne text-xs uppercase tracking-[0.2em] font-medium transition-all cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Save Date to Calendar (.ICS)</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         3. OUR STORY SECTION (SOFT IVORY)
+         ===================================================================== -->
+    <section id="story" class="py-20 sm:py-28 px-4 sm:px-6 bg-ivory paper-texture">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14 reveal">
+                <p class="text-xs uppercase tracking-[0.3em] text-dusty font-semibold mb-2">A Love Built To Last</p>
+                <h2 class="font-serif text-4xl sm:text-5xl text-midnight">Our Story</h2>
+                <!-- Celestial & Botanical Divider -->
+                <div class="flex items-center justify-center gap-3 mt-4">
+                    <span class="h-px w-12 bg-champagne/70"></span>
+                    <svg class="w-4 h-4 text-champagne" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8L12 2Z"/>
+                    </svg>
+                    <span class="h-px w-12 bg-champagne/70"></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                <!-- Left Column: Arched Frame Romantic Crest -->
+                <div class="lg:col-span-5 flex justify-center reveal">
+                    <div class="relative w-72 sm:w-80 h-96 sm:h-[26rem] arch-frame p-3 border-2 border-champagne/65 bg-white shadow-xl">
+                        <div class="w-full h-full arch-frame midnight-texture flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+                            <svg class="w-44 h-44 text-mist/85 mb-4" viewBox="0 0 200 200" fill="none">
+                                <path d="M35 135 C 20 85, 55 30, 100 30 C 145 30, 180 85, 165 135" stroke="#6E8CA8" stroke-width="1.5" stroke-dasharray="3 3"/>
+                                <circle cx="86" cy="98" r="24" stroke="#C8B282" stroke-width="2.5"/>
+                                <circle cx="114" cy="98" r="24" stroke="#DFD0AC" stroke-width="2.5"/>
+                                <polygon points="114,66 108,73 114,76 120,73" fill="#FFFFFF"/>
+                                <path d="M52 72 C 38 64, 38 48, 55 46 C 62 56, 60 66, 52 72 Z" fill="#6E8CA8"/>
+                                <path d="M148 72 C 162 64, 162 48, 145 46 C 138 56, 140 66, 148 72 Z" fill="#6E8CA8"/>
+                                <path d="M100 26 C 92 14, 108 14, 100 26 Z" fill="#C8B282"/>
+                            </svg>
+                            <p class="font-script text-4xl text-champagne">Jeremiah &amp; Regine</p>
+                            <p class="text-[11px] uppercase tracking-[0.25em] text-mist mt-1">February 12, 2027</p>
+                            <p class="text-[10px] text-champagneLight/80 tracking-widest mt-3">#foreveRBewithJEME</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Custom Romantic Story -->
+                <div class="lg:col-span-7 space-y-6 reveal">
+                    <div class="p-8 sm:p-10 rounded-3xl bg-white/90 border border-dusty/25 shadow-lg">
+                        <svg class="w-8 h-8 text-champagne/60 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p class="font-serif text-xl sm:text-2xl text-midnight leading-relaxed">
+                            What began with simple conversations and shared laughter quietly blossomed into a love built on faith, patience, and unwavering devotion. Through every season, milestone, and adventure together, we found our greatest home in one another. Now, surrounded by the family and friends who shaped our journey, we joyfully step forward to begin our forever.
+                        </p>
+                        <div class="mt-6 pt-5 border-t border-dusty/20 flex items-center justify-between">
+                            <span class="font-script text-3xl text-dusty">Jeremiah &amp; Regine Bernadette</span>
+                            <span class="text-xs uppercase tracking-widest text-champagne font-semibold">02 • 12 • 2027</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         4. CEREMONY & RECEPTION DETAILS (MIDNIGHT BLUE)
+         ===================================================================== -->
+    <section id="details" class="py-20 sm:py-28 px-4 sm:px-6 midnight-texture text-ivory">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14 reveal">
+                <p class="text-xs uppercase tracking-[0.3em] text-mist mb-2">When &amp; Where</p>
+                <h2 class="font-serif text-4xl sm:text-5xl text-ivory">Ceremony &amp; Reception</h2>
+                <div class="flex items-center justify-center gap-3 mt-4">
+                    <span class="h-px w-12 bg-champagne/70"></span>
+                    <svg class="w-4 h-4 text-champagne" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8L12 2Z"/>
+                    </svg>
+                    <span class="h-px w-12 bg-champagne/70"></span>
+                </div>
+            </div>
+
+            <!-- Side-by-Side Luxury Venue Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- THE CEREMONY -->
+                <div class="reveal rounded-3xl bg-midnightDeep/80 border border-dusty/50 p-8 sm:p-10 text-center shadow-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-full bg-dusty/20 border border-champagne/50 flex items-center justify-center mx-auto mb-5 text-champagne">
+                            <!-- Minimalist Wedding Rings / Arch Icon -->
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m-1.5-1.5h3M6 21V11l6-5 6 5v10M9 21v-5a3 3 0 016 0v5"/>
+                            </svg>
+                        </div>
+                        <p class="text-xs uppercase tracking-[0.28em] text-champagne font-semibold">THE CEREMONY</p>
+                        <h3 class="font-serif text-3xl text-ivory mt-2">North Stellar Hotel and Events Place</h3>
+                        <p class="text-sm text-mist mt-2">City of Batac, Ilocos Norte</p>
+                        <div class="my-5 py-3 px-5 rounded-xl bg-midnight/85 border border-dusty/35 inline-block">
+                            <p class="font-serif text-2xl text-ivory">3:00 PM</p>
+                            <p class="text-[11px] text-mist uppercase tracking-widest mt-0.5">Friday, February 12, 2027</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="https://maps.app.goo.gl/763Dr2cC1UpAhdgs8?g_st=afm" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-full bg-dusty hover:bg-champagne hover:text-midnight text-ivory text-xs uppercase tracking-[0.2em] font-medium transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span>View Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- THE RECEPTION -->
+                <div class="reveal rounded-3xl bg-midnightDeep/80 border border-dusty/50 p-8 sm:p-10 text-center shadow-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-full bg-dusty/20 border border-champagne/50 flex items-center justify-center mx-auto mb-5 text-champagne">
+                            <!-- Minimalist Champagne Glasses Icon -->
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8m-4-5v5m-5-9a5 5 0 0010 0V4H7v8zm10-6h2a2 2 0 012 2v1a3 3 0 01-3 3h-1M7 6H5a2 2 0 00-2 2v1a3 3 0 003 3h1"/>
+                            </svg>
+                        </div>
+                        <p class="text-xs uppercase tracking-[0.28em] text-champagne font-semibold">THE RECEPTION</p>
+                        <h3 class="font-serif text-3xl text-ivory mt-2">North Stellar Hotel and Events Place</h3>
+                        <p class="text-sm text-mist mt-2">City of Batac, Ilocos Norte</p>
+                        <div class="my-5 py-3 px-5 rounded-xl bg-midnight/85 border border-dusty/35 inline-block">
+                            <p class="font-serif text-2xl text-ivory">5:00 PM</p>
+                            <p class="text-[11px] text-mist uppercase tracking-widest mt-0.5">Cocktails &amp; Reception</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="https://maps.app.goo.gl/763Dr2cC1UpAhdgs8?g_st=afm" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-full bg-dusty hover:bg-champagne hover:text-midnight text-ivory text-xs uppercase tracking-[0.2em] font-medium transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span>View Google Maps</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         5. COMPLETE PHILIPPINE WEDDING ENTOURAGE (SOFT IVORY)
+         ===================================================================== -->
+    <section id="entourage" class="py-20 sm:py-28 px-4 sm:px-6 bg-ivory paper-texture">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="mb-14 reveal">
+                <p class="text-xs uppercase tracking-[0.3em] text-dusty font-semibold mb-2">Those Who Stand With Us</p>
+                <h2 class="font-serif text-4xl sm:text-5xl text-midnight">The Wedding Entourage</h2>
+                <div class="flex items-center justify-center gap-3 mt-4">
+                    <span class="h-px w-12 bg-champagne/70"></span>
+                    <svg class="w-4 h-4 text-champagne" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8L12 2Z"/>
+                    </svg>
+                    <span class="h-px w-12 bg-champagne/70"></span>
+                </div>
+            </div>
+
+            <div class="space-y-12 bg-white/90 backdrop-blur-sm rounded-3xl border border-dusty/25 p-6 sm:p-12 shadow-xl reveal">
+                <!-- Parents of the Groom & Bride -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-8 border-b border-dusty/20">
+                    <div>
+                        <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-3">Parents of the Groom</h3>
+                        <p class="font-serif text-xl sm:text-2xl text-midnight">Ferdinand Corpuz</p>
+                        <p class="font-serif text-xl sm:text-2xl text-midnight">Vilma Corpuz</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-3">Parents of the Bride</h3>
+                        <p class="font-serif text-xl sm:text-2xl text-midnight">Renato Alibuyog</p>
+                        <p class="font-serif text-xl sm:text-2xl text-midnight">Felicidad Alibuyog</p>
+                    </div>
+                </div>
+
+                <!-- Principal Sponsors (Ninongs & Ninangs) -->
+                <div class="pb-8 border-b border-dusty/20">
+                    <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-1">Principal Sponsors</h3>
+                    <p class="font-script text-3xl text-champagne mb-6">Ninongs &amp; Ninangs</p>
+
+                    <!-- Couples Two-Column Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-midnight font-serif text-lg sm:text-xl mb-8">
+                        <p>Nathaniel &amp; Anielyn Alibuyog</p>
+                        <p>Benito &amp; Annie Balneg</p>
+                        <p>Fidel &amp; Virgie Biado</p>
+                        <p>Michael Tacderan &amp; Leah Buduan</p>
+                        <p>Daniel &amp; Cecille Calamayan</p>
+                        <p>Romualdo &amp; Marilyn Canlas</p>
+                        <p>Edwin &amp; Susan Corpuz</p>
+                        <p>Amading &amp; Grace Fermin</p>
+                        <p>Emmanuel &amp; Evangelyn Guittap</p>
+                        <p>Edison &amp; Bernadette Igne</p>
+                        <p>Heraldo &amp; Thelma Layaoen</p>
+                        <p>Jhun &amp; Marites Sacatrapos</p>
+                        <p>Angelo &amp; Amherstia Sacramento</p>
+                        <p>Teddy &amp; Ethel Seggay</p>
+                        <p class="sm:col-span-2">Renie &amp; Lorna Vega</p>
+                    </div>
+
+                    <!-- Individual Principal Sponsors Two-Column Grid -->
+                    <div class="pt-6 border-t border-dusty/15 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-midnight font-serif text-lg sm:text-xl">
+                        <p>Cristina Agorilla</p>
+                        <p>Emelyn Agregado</p>
+                        <p>Buenaflora Asiao</p>
+                        <p>Perlita Baula</p>
+                        <p>Nobleza Bayan</p>
+                        <p>Teresita Daduya</p>
+                        <p>Evelyn Fabunan</p>
+                        <p>Marjorie Garcia</p>
+                        <p>Aurora Garperio</p>
+                        <p>Marilou Lucas</p>
+                        <p>Zeny Muñoz</p>
+                        <p>Myrna Malana</p>
+                        <p>Nora Pitpit</p>
+                        <p>Francisca Sagsagat</p>
+                        <p>Luzviminda Truong</p>
+                        <p>Amparo Tumbaga</p>
+                        <p>Laida Villa</p>
+                        <p>Miladel Yapo</p>
+                    </div>
+                </div>
+
+                <!-- Best Man & Maid of Honor -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-8 border-b border-dusty/20">
+                    <div>
+                        <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-2">Best Man</h3>
+                        <p class="font-serif text-xl sm:text-2xl text-midnight">Arvin Bareng</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-2">Maid of Honor</h3>
+                        <p class="font-serif text-xl sm:text-2xl text-midnight">Ma. Rachelle Kristine Reyes</p>
+                    </div>
+                </div>
+
+                <!-- Groomsmen & Bridesmaids -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-8 border-b border-dusty/20">
+                    <div>
+                        <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-3">Groomsmen</h3>
+                        <div class="font-serif text-xl text-midnight space-y-1.5">
+                            <p>Neil Justin Canlas</p>
+                            <p>Reo Shannon Rangcapan</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-3">Bridesmaids</h3>
+                        <div class="font-serif text-xl text-midnight space-y-1.5">
+                            <p>Dee-Drei Dueñas</p>
+                            <p>Samantha Jowelle Pugat</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Sponsors (Candle, Veil, Cord) -->
+                <div class="pb-8 border-b border-dusty/20">
+                    <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-6">Secondary Sponsors</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div class="p-4 rounded-2xl bg-ivory/70 border border-dusty/15">
+                            <p class="text-[11px] uppercase tracking-widest text-champagne font-semibold mb-2">Candle</p>
+                            <p class="font-serif text-lg sm:text-xl text-midnight">John Anthony Cabrera</p>
+                            <p class="font-serif text-lg sm:text-xl text-midnight">Ma. Theresa Tito</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-ivory/70 border border-dusty/15">
+                            <p class="text-[11px] uppercase tracking-widest text-champagne font-semibold mb-2">Veil</p>
+                            <p class="font-serif text-lg sm:text-xl text-midnight">Rene Alexander Alibuyog</p>
+                            <p class="font-serif text-lg sm:text-xl text-midnight">Charissa Mae Alibuyog</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-ivory/70 border border-dusty/15">
+                            <p class="text-[11px] uppercase tracking-widest text-champagne font-semibold mb-2">Cord</p>
+                            <p class="font-serif text-lg sm:text-xl text-midnight">James Roger Alibuyog</p>
+                            <p class="font-serif text-lg sm:text-xl text-midnight">Princess Kathleen Mae Obien</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bearers & Flower Girls -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-3">Bearers</h3>
+                        <div class="font-serif text-lg sm:text-xl text-midnight space-y-1.5">
+                            <p><span class="text-[11px] uppercase tracking-wider text-dusty font-sans font-semibold mr-1.5">Ring Bearer:</span> Gerald Christian Pugat</p>
+                            <p><span class="text-[11px] uppercase tracking-wider text-dusty font-sans font-semibold mr-1.5">Coin Bearer:</span> Mark Ronald Liggayu</p>
+                            <p><span class="text-[11px] uppercase tracking-wider text-dusty font-sans font-semibold mr-1.5">Bible Bearer:</span> Mark Michael Corpuz</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xs uppercase tracking-[0.25em] text-dusty font-semibold mb-3">Flower Girls</h3>
+                        <div class="font-serif text-lg sm:text-xl text-midnight space-y-1">
+                            <p>Raine Caela Alibuyog</p>
+                            <p>Kimberly Benitez</p>
+                            <p>Geraldine Joy Corpuz</p>
+                            <p>Reyanah Corpuz</p>
+                            <p>Shemariah Pugat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         6 & 7. INTERACTIVE DRESS CODE GUIDE & GIFT / REMINDERS (MIDNIGHT BLUE)
+         ===================================================================== -->
+    <section id="attire" class="py-20 sm:py-28 px-4 sm:px-6 midnight-texture text-ivory">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14 reveal">
+                <p class="text-xs uppercase tracking-[0.3em] text-mist mb-2">Guest Guide</p>
+                <h2 class="font-serif text-4xl sm:text-5xl text-ivory">Attire &amp; Reminders</h2>
+                <div class="flex items-center justify-center gap-3 mt-4">
+                    <span class="h-px w-12 bg-champagne/70"></span>
+                    <svg class="w-4 h-4 text-champagne" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8L12 2Z"/>
+                    </svg>
+                    <span class="h-px w-12 bg-champagne/70"></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Interactive Dress Code Guide -->
+                <div class="reveal rounded-3xl bg-midnightDeep/80 border border-dusty/45 p-8 sm:p-10 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.28em] text-champagne font-semibold text-center">Dress Code</p>
+                        <h3 class="font-serif text-3xl text-center text-ivory mt-1">Formal Attire</h3>
+                        <p class="text-sm text-mist text-center mt-3 leading-relaxed">
+                            We would love to see you in shades of <strong class="text-ivory">Midnight Blue, Dusty Blue, Old Rose, or Beige</strong>. Tap or hover a swatch below to inspect shade styling tips:
+                        </p>
+
+                        <!-- Interactive Color Swatches -->
+                        <div class="my-7 text-center">
+                            <div class="flex items-center justify-center gap-4 sm:gap-5" id="swatch-container">
+                                <button type="button"
+                                        data-color-name="Midnight Blue (#101E36)"
+                                        data-color-tip="Classic evening navy — ideal for tailored suits, tuxedos, or sleek floor-length gowns."
+                                        class="swatch-btn w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#101E36] border-2 border-champagne ring-2 ring-champagne/50 scale-110 shadow-lg transition-transform cursor-pointer"
+                                        aria-label="Midnight Blue"></button>
+                                <button type="button"
+                                        data-color-name="Dusty Blue (#6E8CA8)"
+                                        data-color-tip="Soft romantic slate-blue — effortless for flowing chiffon gowns, midi dresses, or ties."
+                                        class="swatch-btn w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#6E8CA8] border-2 border-white/75 shadow-lg transition-transform hover:scale-110 cursor-pointer"
+                                        aria-label="Dusty Blue"></button>
+                                <button type="button"
+                                        data-color-name="Old Rose (#C08081)"
+                                        data-color-tip="Warm muted rose — flattering in satin, tulle, or modern Filipiniana silhouettes."
+                                        class="swatch-btn w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C08081] border-2 border-white/75 shadow-lg transition-transform hover:scale-110 cursor-pointer"
+                                        aria-label="Old Rose"></button>
+                                <button type="button"
+                                        data-color-name="Beige (#D8C8B8)"
+                                        data-color-tip="Warm champagne-sand — refined for Barong Tagalog accents or soft neutral ensembles."
+                                        class="swatch-btn w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#D8C8B8] border-2 border-white/75 shadow-lg transition-transform hover:scale-110 cursor-pointer"
+                                        aria-label="Beige"></button>
+                            </div>
+                            <p id="selected-swatch-label" class="text-xs uppercase tracking-[0.2em] text-champagne mt-4 font-semibold">
+                                Midnight Blue (#101E36)
+                            </p>
+                            <p id="selected-swatch-tip" class="text-xs text-mist mt-1.5 max-w-sm mx-auto min-h-[2.25rem]">
+                                Classic evening navy — ideal for tailored suits, tuxedos, or sleek floor-length gowns.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 text-sm text-ivory/90 border-t border-dusty/25 pt-5">
+                        <p><strong class="text-champagne uppercase text-xs tracking-wider mr-2">Gentlemen:</strong> Suit &amp; tie or Barong Tagalog with dark trousers</p>
+                        <p><strong class="text-champagne uppercase text-xs tracking-wider mr-2">Ladies:</strong> Long gown, midi dress, or formal Filipiniana</p>
+                        <p class="text-xs text-mist italic pt-1">* We politely reserve white and ivory exclusively for the bride.</p>
+                    </div>
+                </div>
+
+                <!-- Gift Guide & Reminders -->
+                <div class="reveal rounded-3xl bg-midnightDeep/80 border border-dusty/45 p-8 sm:p-10 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-full bg-dusty/20 border border-champagne/45 flex items-center justify-center mx-auto mb-4 text-champagne">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                            </svg>
+                        </div>
+                        <p class="text-xs uppercase tracking-[0.28em] text-champagne font-semibold text-center">Gift Guide</p>
+                        <h3 class="font-serif text-3xl text-center text-ivory mt-1">A Note on Gifts</h3>
+                        <p class="text-sm sm:text-base text-mist text-center mt-4 leading-relaxed font-serif italic text-lg">
+                            “Your presence at our wedding is the greatest gift we could ask for. However, should you wish to bless us with a gift as we start our new life together, a monetary contribution toward our future home would be deeply appreciated.”
+                        </p>
+                    </div>
+
+                    <!-- Reminders -->
+                    <div class="mt-8 pt-6 border-t border-dusty/25 space-y-4">
+                        <div class="p-4 rounded-2xl bg-midnight/75 border border-dusty/30">
+                            <p class="text-xs uppercase tracking-[0.22em] text-champagne font-semibold mb-1">Unplugged Ceremony</p>
+                            <p class="text-xs text-mist leading-relaxed">
+                                Please keep phones and cameras tucked away during the ceremony so you can be fully present with us while our photographers capture every moment.
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-midnight/75 border border-dusty/30">
+                            <p class="text-xs uppercase tracking-[0.22em] text-champagne font-semibold mb-1">Reserved Seating</p>
+                            <p class="text-xs text-mist leading-relaxed">
+                                Due to limited venue capacity, we can only accommodate the guests formally listed on your invitation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         8. RSVP MODAL (POPS UP 1 SECOND AFTER THE WAX SEAL IS OPENED)
+         Guest name is read from the invitation link: ?name=Juan%20Dela%20Cruz
+         ===================================================================== -->
+    <div id="rsvp-modal" class="fixed inset-0 z-[60] flex items-center justify-center px-4 py-6"
+         role="dialog" aria-modal="true" aria-labelledby="rsvp-modal-title" aria-hidden="true">
+        <!-- Backdrop -->
+        <div id="rsvp-modal-backdrop" class="absolute inset-0 bg-midnightDeep/80 backdrop-blur-sm"></div>
+
+        <!-- Panel -->
+        <div id="rsvp-modal-panel" tabindex="-1"
+             class="rsvp-modal-panel relative w-full max-w-lg rounded-3xl border border-champagne/60 bg-ivory paper-texture shadow-2xl overflow-hidden focus:outline-none">
+            <!-- Inner Dusty Blue Frame -->
+            <div class="absolute inset-2.5 border border-dusty/25 rounded-[1.25rem] pointer-events-none"></div>
+
+            <!-- Close Button -->
+            <button type="button" id="rsvp-close-btn" aria-label="Close RSVP"
+                    class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center text-steel hover:text-midnight hover:bg-dusty/15 transition-colors cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div id="rsvp-modal-scroll" class="relative max-h-[90vh] overflow-y-auto px-6 sm:px-10 py-10 sm:py-12">
+
+                <!-- STEP 1: RESPOND -->
+                <div id="rsvp-step-respond">
+                    <div class="text-center mb-8">
+                        <p class="text-xs uppercase tracking-[0.3em] text-dusty font-semibold mb-2">Be Our Guest</p>
+                        <h2 id="rsvp-modal-title" class="font-serif text-4xl sm:text-5xl text-midnight">RSVP</h2>
+                        <p class="text-sm text-midnight/85 mt-3 font-medium">
+                            Kindly respond on or before <span class="whitespace-nowrap text-dusty font-semibold underline decoration-champagne underline-offset-4">December 31, 2026</span>
+                        </p>
+                        <div class="flex items-center justify-center gap-3 mt-4">
+                            <span class="h-px w-12 bg-champagne/70"></span>
+                            <svg class="w-4 h-4 text-champagne" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8L12 2Z"/>
+                            </svg>
+                            <span class="h-px w-12 bg-champagne/70"></span>
+                        </div>
+                    </div>
+
+                    <!-- Guest Name (from link, read-only) -->
+                    <div>
+                        <label for="rsvp-guest-name" class="block text-xs uppercase tracking-widest text-midnight font-semibold mb-2">
+                            Guest Name
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="rsvp-guest-name" readonly aria-readonly="true" tabindex="-1"
+                                   class="w-full px-4 py-3 pr-11 rounded-xl border border-dusty/35 bg-white/70 text-midnight text-sm font-semibold cursor-default focus:outline-none">
+                            <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-dusty pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Two Choices -->
+                    <div id="rsvp-choice-actions" class="mt-7 space-y-3">
+                        <button type="button" id="rsvp-accept-btn"
+                                class="w-full py-4 rounded-full bg-midnight hover:bg-dusty text-ivory text-xs uppercase tracking-[0.25em] font-semibold shadow-lg transition-all cursor-pointer">
+                            Gracefully Accept
+                        </button>
+                        <button type="button" id="rsvp-decline-btn"
+                                class="w-full py-4 rounded-full border border-dusty/45 bg-white/60 hover:bg-dusty/10 hover:border-dusty text-midnight text-xs uppercase tracking-[0.25em] font-semibold transition-all cursor-pointer">
+                            Respectfully Decline
+                        </button>
+                    </div>
+
+                    <!-- Optional Message (accept) / Reason (decline): text is set in JS -->
+                    <div id="rsvp-note-panel" class="hidden mt-7">
+                        <label for="rsvp-note" class="block text-xs uppercase tracking-widest text-midnight font-semibold mb-2">
+                            <span id="rsvp-note-label"></span> <span class="normal-case tracking-normal font-normal text-steel">(optional)</span>
+                        </label>
+                        <textarea id="rsvp-note" rows="3" maxlength="300"
+                                  class="w-full px-4 py-3 rounded-xl border border-dusty/35 bg-white/70 text-midnight text-sm focus:outline-none focus:border-dusty focus:ring-2 focus:ring-dusty/20"></textarea>
+                        <button type="button" id="rsvp-note-confirm-btn"
+                                class="mt-4 w-full py-4 rounded-full bg-midnight hover:bg-dusty text-ivory text-xs uppercase tracking-[0.25em] font-semibold shadow-lg transition-all cursor-pointer">
+                        </button>
+                        <button type="button" id="rsvp-note-back-btn"
+                                class="mt-3 w-full py-2 text-xs uppercase tracking-widest text-dusty hover:text-midnight transition-colors cursor-pointer">
+                            Back
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: THANK YOU + GIFT QR -->
+                <div id="rsvp-step-thanks" class="hidden text-center">
+                    <div class="w-14 h-14 rounded-full bg-dusty/15 border border-champagne/60 flex items-center justify-center mx-auto mb-4 text-dusty font-serif text-2xl">♥</div>
+                    <p id="rsvp-thanks-eyebrow" class="text-xs uppercase tracking-[0.3em] text-dusty font-semibold mb-2"></p>
+                    <h2 id="rsvp-thanks-title" class="font-serif text-3xl sm:text-4xl text-midnight leading-tight break-words"></h2>
+                    <p id="rsvp-thanks-message" class="text-sm text-midnight/80 mt-4 leading-relaxed"></p>
+                    <p class="mt-5 text-[11px] uppercase tracking-widest text-steel">With love,</p>
+                    <p class="font-script text-3xl sm:text-4xl text-dusty mt-1">Jeremiah &amp; Regine Bernadette</p>
+
+                    <!-- Gift: GCash / InstaPay -->
+                    <div class="mt-7 pt-6 border-t border-dusty/25">
+                        <p class="text-xs uppercase tracking-[0.28em] text-dusty font-semibold">Gift Guide</p>
+                        <p id="rsvp-gift-note" class="font-serif italic text-lg text-midnight/85 mt-2 leading-snug"></p>
+
+                        <div class="mt-5 inline-flex p-1 rounded-full bg-white border border-dusty/30 shadow-sm" role="tablist" aria-label="Gift payment options">
+                            <button type="button" role="tab" data-gift-tab="gcash"
+                                    class="px-5 py-2 rounded-full text-[11px] uppercase tracking-[0.2em] font-semibold transition-all cursor-pointer">GCash</button>
+                            <button type="button" role="tab" data-gift-tab="instapay"
+                                    class="px-5 py-2 rounded-full text-[11px] uppercase tracking-[0.2em] font-semibold transition-all cursor-pointer">InstaPay</button>
+                        </div>
+
+                        <!-- PLACEHOLDER QR CODES: replace each .fake-qr div with <img src="..."> of the real QR -->
+                        <div data-gift-panel="gcash" class="mt-5">
+                            <div class="flex flex-col items-center">
+                                <div class="fake-qr w-44 h-44 p-3 rounded-2xl bg-white border border-dusty/30 shadow-sm" data-qr-seed="20270212" role="img" aria-label="GCash QR code"></div>
+                                <p class="mt-3 text-xs uppercase tracking-widest text-midnight font-semibold">Jeremiah Corpuz</p>
+                                <p class="text-xs text-steel mt-1 tracking-wider">GCash • 09XX XXX XXXX</p>
+                                <p class="text-[11px] text-steel/80 italic mt-1">Scan using your GCash app</p>
+                            </div>
+                        </div>
+                        <div data-gift-panel="instapay" class="hidden mt-5">
+                            <div class="flex flex-col items-center">
+                                <div class="fake-qr w-44 h-44 p-3 rounded-2xl bg-white border border-dusty/30 shadow-sm" data-qr-seed="1202" role="img" aria-label="InstaPay QR code"></div>
+                                <p class="mt-3 text-xs uppercase tracking-widest text-midnight font-semibold">Regine Bernadette Alibuyog</p>
+                                <p class="text-xs text-steel mt-1 tracking-wider">InstaPay • Acct. No. XXXX XXXX XXXX</p>
+                                <p class="text-[11px] text-steel/80 italic mt-1">Scan using any InstaPay-enabled bank or e-wallet</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" id="rsvp-ok-btn"
+                            class="mt-8 w-full py-4 rounded-full bg-midnight hover:bg-dusty text-ivory text-xs uppercase tracking-[0.25em] font-semibold shadow-lg transition-all cursor-pointer">
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         9. FOOTER
+         ===================================================================== -->
+    <footer class="midnight-texture text-ivory py-14 px-4 text-center border-t border-dusty/30">
+        <div class="max-w-2xl mx-auto">
+            <p class="font-script text-4xl sm:text-5xl text-champagne mb-2">Jeremiah &amp; Regine Bernadette</p>
+            <p class="text-xs uppercase tracking-[0.3em] text-mist">February 12, 2027 • City of Batac, Ilocos Norte</p>
+            <p class="mt-5 inline-block px-5 py-1.5 rounded-full bg-dusty/25 border border-champagne/40 text-xs tracking-widest text-ivory font-medium">
+                #foreveRBewithJEME
+            </p>
+        </div>
+    </footer>
+
+    <!-- =====================================================================
+         JAVASCRIPT: ENVELOPE, NATIVE WEB AUDIO HARP/PIANO MELODY, COUNTDOWN,
+         SWATCHES, ICS DOWNLOAD & RSVP MODAL
+         ===================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* ---------------------------------------------------------------
+               1. NATIVE WEB AUDIO API SYNTHESIZED HARP/PIANO MELODY
+               --------------------------------------------------------------- */
+            let audioCtx = null;
+            let isPlaying = false;
+            let melodyTimer = null;
+            let noteStep = 0;
+
+            // Gentle D-Major Canon-inspired frequencies (Hz)
+            const melodyNotes = [
+                293.66, 369.99, 440.00, 587.33, // D4, F#4, A4, D5
+                220.00, 329.63, 440.00, 554.37, // A3, E4, A4, C#5
+                246.94, 293.66, 369.99, 493.88, // B3, D4, F#4, B4
+                185.00, 277.18, 369.99, 440.00, // F#3, C#4, F#4, A4
+                196.00, 246.94, 293.66, 392.00, // G3, B3, D4, G4
+                146.83, 220.00, 293.66, 369.99, // D3, A3, D4, F#4
+                196.00, 246.94, 293.66, 392.00, // G3, B3, D4, G4
+                220.00, 329.63, 440.00, 554.37  // A3, E4, A4, C#5
+            ];
+
+            function playHarpPluck(freq) {
+                if (!audioCtx || !isPlaying) return;
+                const now = audioCtx.currentTime;
+
+                const osc1 = audioCtx.createOscillator();
+                const osc2 = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(freq, now);
+
+                // Soft octave harmonic for harp warmth
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(freq * 2, now);
+
+                const subGain = audioCtx.createGain();
+                subGain.gain.setValueAtTime(0.15, now);
+
+                gain.gain.setValueAtTime(0.0001, now);
+                gain.gain.exponentialRampToValueAtTime(0.075, now + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
+
+                osc1.connect(gain);
+                osc2.connect(subGain);
+                subGain.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc1.start(now);
+                osc2.start(now);
+                osc1.stop(now + 2.5);
+                osc2.stop(now + 2.5);
+            }
+
+            function startWeddingMusic() {
+                try {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContextClass) return;
+
+                    if (!audioCtx) {
+                        audioCtx = new AudioContextClass();
+                    }
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+                    if (isPlaying) return;
+
+                    isPlaying = true;
+                    updateMusicIcons();
+
+                    playHarpPluck(melodyNotes[noteStep % melodyNotes.length]);
+                    noteStep++;
+
+                    melodyTimer = setInterval(() => {
+                        if (!isPlaying) return;
+                        playHarpPluck(melodyNotes[noteStep % melodyNotes.length]);
+                        noteStep++;
+                    }, 780);
+                } catch (err) {
+                    console.warn('Web Audio API unavailable:', err);
+                }
+            }
+
+            function stopWeddingMusic() {
+                isPlaying = false;
+                if (melodyTimer) {
+                    clearInterval(melodyTimer);
+                    melodyTimer = null;
+                }
+                updateMusicIcons();
+            }
+
+            function toggleWeddingMusic() {
+                if (isPlaying) {
+                    stopWeddingMusic();
+                } else {
+                    startWeddingMusic();
+                }
+            }
+
+            function updateMusicIcons() {
+                const iconOn = document.getElementById('icon-sound-on');
+                const iconOff = document.getElementById('icon-sound-off');
+                if (isPlaying) {
+                    iconOn.classList.remove('hidden');
+                    iconOff.classList.add('hidden');
+                } else {
+                    iconOn.classList.add('hidden');
+                    iconOff.classList.remove('hidden');
+                }
+            }
+
+            document.getElementById('music-toggle-btn').addEventListener('click', toggleWeddingMusic);
+
+            /* ---------------------------------------------------------------
+               2. WAX-SEAL ENVELOPE COVER OPENING
+               --------------------------------------------------------------- */
+            const envelopeOverlay = document.getElementById('envelope-overlay');
+            let rsvpAutoOpenQueued = false;
+            [document.getElementById('open-invitation-btn'), document.getElementById('open-text-btn')].forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        envelopeOverlay.classList.add('opened');
+                        startWeddingMusic();
+                        // Pop up the RSVP 1 second after the seal is opened
+                        if (!rsvpAutoOpenQueued) {
+                            rsvpAutoOpenQueued = true;
+                            setTimeout(openRsvpModal, 1000);
+                        }
+                    });
+                }
+            });
+
+            /* ---------------------------------------------------------------
+               3. MOBILE NAVIGATION TOGGLE
+               --------------------------------------------------------------- */
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            /* ---------------------------------------------------------------
+               4. REAL-TIME COUNTDOWN TO FEBRUARY 12, 2027 15:00:00 (PHT)
+               --------------------------------------------------------------- */
+            const weddingDate = new Date('February 12, 2027 15:00:00').getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+
+                if (distance <= 0) {
+                    document.getElementById('cd-days').textContent = '00';
+                    document.getElementById('cd-hours').textContent = '00';
+                    document.getElementById('cd-minutes').textContent = '00';
+                    document.getElementById('cd-seconds').textContent = '00';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            /* ---------------------------------------------------------------
+               5. SAVE DATE TO CALENDAR (.ICS) DOWNLOAD
+               --------------------------------------------------------------- */
+            document.getElementById('download-ics-btn').addEventListener('click', () => {
+                const icsContent = [
+                    'BEGIN:VCALENDAR',
+                    'VERSION:2.0',
+                    'PRODID:-//Jeremiah and Regine Bernadette Wedding//EN',
+                    'BEGIN:VEVENT',
+                    'DTSTART:20270212T070000Z',
+                    'DTEND:20270212T140000Z',
+                    'SUMMARY:Wedding of Jeremiah Corpuz & Regine Bernadette Alibuyog (#foreveRBewithJEME)',
+                    'DESCRIPTION:Ceremony at 3:00 PM followed by Cocktails & Reception at 5:00 PM at North Stellar Hotel and Events Place, City of Batac, Ilocos Norte.',
+                    'LOCATION:North Stellar Hotel and Events Place, City of Batac, Ilocos Norte',
+                    'END:VEVENT',
+                    'END:VCALENDAR'
+                ].join('\r\n');
+
+                const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'Jeremiah-and-Regine-Wedding-Feb-12-2027.ics');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            });
+
+            /* ---------------------------------------------------------------
+               6. INTERACTIVE DRESS CODE COLOR SWATCHES
+               --------------------------------------------------------------- */
+            const swatchBtns = document.querySelectorAll('.swatch-btn');
+            const swatchLabel = document.getElementById('selected-swatch-label');
+            const swatchTip = document.getElementById('selected-swatch-tip');
+
+            swatchBtns.forEach(btn => {
+                const activateSwatch = () => {
+                    swatchLabel.textContent = btn.getAttribute('data-color-name');
+                    swatchTip.textContent = btn.getAttribute('data-color-tip');
+                    swatchBtns.forEach(b => b.classList.remove('ring-2', 'ring-champagne/50', 'scale-110'));
+                    btn.classList.add('ring-2', 'ring-champagne/50', 'scale-110');
+                };
+                btn.addEventListener('click', activateSwatch);
+                btn.addEventListener('mouseenter', activateSwatch);
+            });
+
+            /* ---------------------------------------------------------------
+               7. RSVP MODAL: NAME FROM ?name=, ACCEPT / DECLINE, GIFT QR
+               Responses are not saved anywhere yet.
+               --------------------------------------------------------------- */
+            const rsvpModal = document.getElementById('rsvp-modal');
+            const rsvpPanel = document.getElementById('rsvp-modal-panel');
+            const rsvpScroll = document.getElementById('rsvp-modal-scroll');
+            const stepRespond = document.getElementById('rsvp-step-respond');
+            const stepThanks = document.getElementById('rsvp-step-thanks');
+            const choiceActions = document.getElementById('rsvp-choice-actions');
+            const notePanel = document.getElementById('rsvp-note-panel');
+            const noteInput = document.getElementById('rsvp-note');
+            let rsvpAccepted = true;
+            const giftTabs = rsvpModal.querySelectorAll('[data-gift-tab]');
+            const giftPanels = rsvpModal.querySelectorAll('[data-gift-panel]');
+            let rsvpReturnFocus = null;
+
+            // Guest name comes only from the invitation link and cannot be edited
+            const guestName = (new URLSearchParams(window.location.search).get('name') || '')
+                .replace(/\s+/g, ' ').trim().slice(0, 80);
+            document.getElementById('rsvp-guest-name').value = guestName || 'Honored Guest';
+
+            function showRsvpStep(step) {
+                [stepRespond, stepThanks].forEach(s => s.classList.add('hidden'));
+                step.classList.remove('hidden', 'rsvp-step-in');
+                void step.offsetWidth; // restart the fade-in animation
+                step.classList.add('rsvp-step-in');
+                rsvpScroll.scrollTop = 0;
+            }
+
+            function selectGiftTab(key) {
+                giftTabs.forEach(tab => {
+                    const active = tab.dataset.giftTab === key;
+                    tab.setAttribute('aria-selected', String(active));
+                    tab.classList.toggle('bg-midnight', active);
+                    tab.classList.toggle('text-ivory', active);
+                    tab.classList.toggle('shadow', active);
+                    tab.classList.toggle('text-steel', !active);
+                    tab.classList.toggle('hover:text-midnight', !active);
+                });
+                giftPanels.forEach(panel => panel.classList.toggle('hidden', panel.dataset.giftPanel !== key));
+            }
+            giftTabs.forEach(tab => tab.addEventListener('click', () => selectGiftTab(tab.dataset.giftTab)));
+
+            function openRsvpModal() {
+                if (rsvpModal.classList.contains('open')) return;
+                showRsvpStep(stepRespond);
+                choiceActions.classList.remove('hidden');
+                notePanel.classList.add('hidden');
+                noteInput.value = '';
+                selectGiftTab('gcash');
+
+                rsvpReturnFocus = document.activeElement;
+                rsvpModal.classList.add('open');
+                rsvpModal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('overflow-hidden');
+                requestAnimationFrame(() => rsvpPanel.focus({ preventScroll: true }));
+            }
+
+            function closeRsvpModal() {
+                rsvpModal.classList.remove('open');
+                rsvpModal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('overflow-hidden');
+                if (rsvpReturnFocus && typeof rsvpReturnFocus.focus === 'function') {
+                    rsvpReturnFocus.focus({ preventScroll: true });
+                }
+            }
+
+            function showRsvpThanks(accepted) {
+                const who = guestName ? `, ${guestName}` : '';
+                document.getElementById('rsvp-thanks-eyebrow').textContent = accepted ? 'Joyfully Accepted' : 'Regrets Received';
+                document.getElementById('rsvp-thanks-title').textContent = `Thank You${who}${accepted ? '!' : ''}`;
+                document.getElementById('rsvp-thanks-message').textContent = accepted
+                    ? "We're overjoyed that you'll be celebrating with us. See you on February 12, 2027 at North Stellar Hotel and Events Place, City of Batac, Ilocos Norte!"
+                    : "We'll miss you dearly, and we're so grateful you let us know. You'll be in our hearts and prayers on our special day.";
+                document.getElementById('rsvp-gift-note').textContent = accepted
+                    ? 'Your presence is the greatest gift. Should you wish to bless us further, you may send your gift through GCash or InstaPay.'
+                    : "Though you can't be with us, should you wish to send your blessings, you may do so through GCash or InstaPay.";
+                showRsvpStep(stepThanks);
+                rsvpPanel.focus({ preventScroll: true });
+            }
+
+            // Both choices open the optional message box, worded for accept or decline
+            function showNotePanel(accepted) {
+                rsvpAccepted = accepted;
+                document.getElementById('rsvp-note-label').textContent = accepted ? 'Message for the Couple' : 'Reason';
+                noteInput.placeholder = accepted
+                    ? 'Share a wish, a prayer, or a little marriage advice...'
+                    : 'Share a short note with the couple, if you wish...';
+                document.getElementById('rsvp-note-confirm-btn').textContent = accepted ? 'Confirm Attendance' : 'Send Regrets';
+                choiceActions.classList.add('hidden');
+                notePanel.classList.remove('hidden', 'rsvp-step-in');
+                void notePanel.offsetWidth;
+                notePanel.classList.add('rsvp-step-in');
+                rsvpPanel.focus({ preventScroll: true });
+            }
+
+            document.getElementById('rsvp-accept-btn').addEventListener('click', () => showNotePanel(true));
+            document.getElementById('rsvp-decline-btn').addEventListener('click', () => showNotePanel(false));
+
+            document.getElementById('rsvp-note-back-btn').addEventListener('click', () => {
+                notePanel.classList.add('hidden');
+                choiceActions.classList.remove('hidden');
+                rsvpPanel.focus({ preventScroll: true });
+            });
+
+            // The optional message / reason is collected here but not saved yet
+            document.getElementById('rsvp-note-confirm-btn').addEventListener('click', () => showRsvpThanks(rsvpAccepted));
+
+            document.getElementById('rsvp-close-btn').addEventListener('click', closeRsvpModal);
+            document.getElementById('rsvp-ok-btn').addEventListener('click', closeRsvpModal);
+            document.getElementById('rsvp-modal-backdrop').addEventListener('click', closeRsvpModal);
+
+            // Nav / hero RSVP links open the modal
+            document.querySelectorAll('[data-open-rsvp]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openRsvpModal();
+                });
+            });
+
+            // Escape closes; Tab stays inside the modal while it is open
+            document.addEventListener('keydown', (e) => {
+                if (!rsvpModal.classList.contains('open')) return;
+                if (e.key === 'Escape') {
+                    closeRsvpModal();
+                    return;
+                }
+                if (e.key !== 'Tab') return;
+                const focusables = Array.from(rsvpPanel.querySelectorAll('button, textarea'))
+                    .filter(el => el.offsetParent !== null);
+                if (!focusables.length) return;
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+                const active = document.activeElement;
+                const outside = !rsvpPanel.contains(active) || active === rsvpPanel;
+                if (e.shiftKey && (active === first || outside)) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && (active === last || !rsvpPanel.contains(active))) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            });
+
+            // Placeholder QR codes (decorative only, not scannable)
+            function renderFakeQR(el, seed) {
+                const n = 25;
+                let s = seed >>> 0;
+                const rand = () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296;
+                const finders = [[0, 0], [0, n - 7], [n - 7, 0]];
+                const isOn = (r, c) => {
+                    for (const [fr, fc] of finders) {
+                        if (r >= fr - 1 && r <= fr + 7 && c >= fc - 1 && c <= fc + 7) {
+                            const y = r - fr, x = c - fc;
+                            if (y < 0 || y > 6 || x < 0 || x > 6) return false;
+                            return y === 0 || y === 6 || x === 0 || x === 6 || (y >= 2 && y <= 4 && x >= 2 && x <= 4);
+                        }
+                    }
+                    if (Math.abs(r - 18) <= 2 && Math.abs(c - 18) <= 2) {
+                        return Math.max(Math.abs(r - 18), Math.abs(c - 18)) !== 1;
+                    }
+                    if (r === 6) return c % 2 === 0;
+                    if (c === 6) return r % 2 === 0;
+                    if (Math.abs(r - 12) <= 3 && Math.abs(c - 12) <= 3) return false; // room for the J&R badge
+                    return rand() < 0.5;
+                };
+                let d = '';
+                for (let r = 0; r < n; r++) {
+                    for (let c = 0; c < n; c++) {
+                        if (isOn(r, c)) d += `M${c} ${r}h1v1h-1z`;
+                    }
+                }
+                el.innerHTML = `
+                    <svg viewBox="0 0 ${n} ${n}" class="w-full h-full" shape-rendering="crispEdges" aria-hidden="true">
+                        <path fill="#101E36" d="${d}"/>
+                        <circle cx="12.5" cy="12.5" r="3.3" fill="#C8B282" stroke="#FFFFFF" stroke-width="0.6" shape-rendering="geometricPrecision"/>
+                        <text x="12.5" y="13.55" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="2.9" font-weight="700" fill="#101E36">J&amp;R</text>
+                    </svg>`;
+            }
+            rsvpModal.querySelectorAll('.fake-qr').forEach(el => {
+                if (!el.children.length) renderFakeQR(el, Number(el.dataset.qrSeed));
+            });
+
+            /* ---------------------------------------------------------------
+               8. SCROLL REVEAL OBSERVER
+               --------------------------------------------------------------- */
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
